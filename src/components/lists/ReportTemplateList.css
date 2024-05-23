@@ -1,0 +1,36 @@
+.template-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .template-item {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+  }
+  
+  .template-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .questions-container {
+    margin-top: 10px;
+    padding-left: 20px;
+  }
+  
+  .question-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .question-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+  }
+  
+  button {
+    cursor: pointer;
+  }
+  
