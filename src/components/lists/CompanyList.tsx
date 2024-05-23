@@ -1,10 +1,10 @@
-// src/components/CompanyList.tsx
 
 import React, { useEffect, useState } from 'react';
-import { getCompanies } from '../services/apiService';
+import { getCompanies } from '../../services/apiService';
+import { Company } from '../../types/models';
 
 const CompanyList: React.FC = () => {
-  const [companies, setCompanies] = useState<any[]>([]);
+  const [companies, setCompanies] = useState<Company[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 

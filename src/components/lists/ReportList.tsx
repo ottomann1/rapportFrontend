@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { getReports } from '../services/apiService';
+import { getReports } from '../../services/apiService';
+import { Report } from '../../types/models';
 
 const ReportList: React.FC = () => {
-  const [reports, setReports] = useState<any[]>([]);
+  const [reports, setReports] = useState<Report[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -29,7 +30,7 @@ const ReportList: React.FC = () => {
       <h1>Report List</h1>
       <ul>
         {reports.map(report => (
-          <li key={report.id}>{report.name}</li>
+          <li key={report.id}>{report.report_title}</li>
         ))}
       </ul>
     </div>
