@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { ReportTemplate } from '../../types/models';
 import QuestionList from '../lists/QuestionList';
-import './TemplateRow.css';
 
 interface TemplateRowProps {
   template: ReportTemplate;
@@ -16,17 +15,17 @@ const TemplateRow: React.FC<TemplateRowProps> = ({ template, onShowReports }) =>
   };
 
   return (
-    <li className="template-item">
-      <div className="template-header">
+    <li className="list-group-item">
+      <div className="d-flex justify-content-between align-items-center">
         <span>{template.name}</span>
-        <button onClick={handleToggle}>
+        <button className="btn btn-primary" onClick={handleToggle}>
           {expanded ? 'Hide' : 'Show'} Questions
         </button>
       </div>
       {expanded && (
-        <div className="questions-container">
+        <div className="mt-3">
           <QuestionList questions={template.questions} />
-          <button onClick={() => onShowReports(template)}>
+          <button className="btn btn-secondary mt-2" onClick={() => onShowReports(template)}>
             Show All Reports
           </button>
         </div>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Question } from '../../types/models';
-import './QuestionRow.css';
 
 interface QuestionRowProps {
   question: Question;
@@ -22,7 +21,7 @@ const QuestionRow: React.FC<QuestionRowProps> = ({ question }) => {
   const answerCounts = calculateAnswers(question);
 
   return (
-    <li className="question-item">
+    <li className="list-group-item d-flex justify-content-between align-items-center">
       <span>{question.text}</span>
       <span>Yes: {answerCounts.yes}</span>
       <span>No: {answerCounts.no}</span>

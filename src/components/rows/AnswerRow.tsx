@@ -1,32 +1,50 @@
 import React, { useState } from 'react';
-import { Answer } from '../../types/models';
+import { Answer, Report } from '../../types/models';
 import './AnswerRow.css';
 
 interface AnswerRowProps {
-  answer: Answer;
+  report: Report;
 }
 
-const AnswerRow: React.FC<AnswerRowProps> = ({ answer }) => {
-  const [showExplanation, setShowExplanation] = useState<boolean>(false);
+const AnswerRow: React.FC<AnswerRowProps> = ({ report }) => {
+  const [showDetails, setShowDetails] = useState<boolean>(false);
 
-  const toggleExplanation = () => {
-    setShowExplanation(!showExplanation);
+  const toggleDetails = () => {
+    setShowDetails(!showDetails);
   };
 
   return (
-    <li className="answer-item">
-      <div className="answer-content">
-        <span className="question-text">{answer.question}</span>
-        <span className="answer-text">{answer.answer}</span>
-        {answer.explanation && (
-          <button className="show-more-button" onClick={toggleExplanation}>
-            {showExplanation ? 'Hide' : 'Show more'}
-          </button>
-        )}
+    <li className="list-group-item" onClick={toggleDetails}>
+      <div className="d-flex justify-content-between align-items-center">
+        <span className="flex-grow-1">{report.report_title}</span>
+        <button className="btn btn-link" onClick={toggleDetails}>
+          {showDetails ? 'Hide' : 'Show more'}
+        </button>
       </div>
-      {showExplanation && answer.explanation && (
-        <div className="explanation">
-          <strong>Explanation:</strong> {answer.explanation}
+      {showDetails && (
+        <div className="mt-2">
+          {report.questions.map((question) => (
+            <div key={question.id} className="question-item mt-3">
+              <strong>Question:</strong> {question.text}
+              {question.answers.map((answer) => (
+                <div key={answer.id} className="answer-item mt-2">
+                  <strong>Answer:</strong> {answer.answer}
+                  {answer.explanation && (
+                    <div className="explanation mt-1">
+                      <strong>Explanation:</strong> {answer.explanation}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          ))}
+          <div className="report-details mt-3">
+            <p>
+              Reported by {report.submitted_by} at {report.company}
+            </p>
+            <p>Submitted on: {report.submitted_on}</p>
+            <p>Last updated: {report.last_updated}</p>
+          </div>
         </div>
       )}
     </li>

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { getReportTemplates } from '../../services/apiService';
-import { ReportTemplate, Report, Answer } from '../../types/models';
+import { ReportTemplate, Report } from '../../types/models';
 import TemplateRow from '../rows/TemplateRow';
 import Modal from '../Modal';
 import AnswerRow from '../rows/AnswerRow';
-import './ReportTemplateList.css';
 
 const ReportTemplateList: React.FC = () => {
   const [templates, setTemplates] = useState<ReportTemplate[]>([]);
@@ -39,9 +38,9 @@ const ReportTemplateList: React.FC = () => {
   if (error) return <div>{error}</div>;
 
   return (
-    <div>
-      <h1>Report Template List</h1>
-      <ul className="template-list">
+    <div className="container">
+      <h1 className="my-4">Report Template List</h1>
+      <ul className="list-group">
         {templates.map(template => (
           <TemplateRow
             key={template.id}
@@ -51,20 +50,11 @@ const ReportTemplateList: React.FC = () => {
         ))}
       </ul>
       <Modal show={showModal} onClose={() => setShowModal(false)} title={modalTitle}>
-        {modalReports.map(report => (
-          <ul key={report.id}>
-            <strong>{report.report_title}</strong>
-              
-            {report.questions.map(question => (
-              question.answers.map(answer => (
-                <AnswerRow key={answer.id} answer={answer} />
-              ))
-            ))}
-            <p>Reported by {report.submitted_by} at {report.company}</p>
-            <p>Submitted on: {report.submitted_on}</p>
-            <p>Last updated: {report.last_updated}</p>
-          </ul>
-        ))}
+        <ul className="list-group">
+          {modalReports.map(report => (
+            <AnswerRow key={report.id} report={report} />
+          ))}
+        </ul>
       </Modal>
     </div>
   );

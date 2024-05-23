@@ -1,7 +1,6 @@
 import React from 'react';
 import { Question } from '../../types/models';
 import QuestionRow from '../rows/QuestionRow';
-import './QuestionList.css';
 
 interface QuestionListProps {
   questions: Question[];
@@ -9,7 +8,7 @@ interface QuestionListProps {
 
 const QuestionList: React.FC<QuestionListProps> = ({ questions }) => {
   return (
-    <ul className="question-list">
+    <ul className="list-group">
       {questions.map(question => (
         <QuestionRow key={question.id} question={question} />
       ))}
