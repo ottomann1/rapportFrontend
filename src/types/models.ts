@@ -11,37 +11,39 @@ export interface Company {
     is_company_admin: boolean;
   }
   
-  export interface ReportTemplate {
+  export interface Answer {
     id: number;
-    name: string;
-    accessible_by: number[];
-    company: number | null;
-    questions: Question[];
-    reports: Report[];
+    question: number; // Question ID
+    report: number; // Report ID
+    answer: string;
+    explanation?: string | null;
+    company: number | null; // Company ID or null
   }
   
   export interface Question {
     id: number;
     text: string;
-    template: number; 
-    company: number | null;
+    template: number; // Template ID
+    company: number | null; // Company ID or null
+    answers: Answer[]; // Nested answers
   }
   
   export interface Report {
     id: number;
     report_title: string;
-    submitted_on: string; 
-    last_updated: string; 
-    template: number | null; 
-    submitted_by: number | null; 
-    company: number | null; 
+    submitted_on: string; // Date as a string
+    last_updated: string; // Date as a string
+    template: number | null; // Template ID or null
+    submitted_by: number | null; // User ID or null
+    company: number | null; // Company ID or null
+    questions: Question[]; // Nested questions
   }
   
-  export interface Answer {
+  export interface ReportTemplate {
     id: number;
-    question: number;
-    report: number;
-    answer: string;
-    explanation?: string | null;
-    company: number | null; 
+    name: string;
+    accessible_by: number[]; // Array of user IDs
+    company: number | null; // Company ID or null
+    questions: Question[];
+    reports: Report[];
   }
