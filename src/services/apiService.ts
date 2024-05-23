@@ -12,7 +12,8 @@ export const getCompanies = async () => {
 
 export const getReports = async () => {
     try {
-      const response = await axiosInstance.get('/report/');
+      const response = await axiosInstance.get('/reports/');
+      console.log(response);
       return response.data;
     } catch (error) {
       console.error('Error fetching reports:', error);
@@ -22,7 +23,7 @@ export const getReports = async () => {
 
 export const createReport = async (reportData: any) => {
   try {
-    const response = await axiosInstance.post('/report/', reportData);
+    const response = await axiosInstance.post('/reports/', reportData);
     return response.data;
   } catch (error) {
     console.error('Error creating report:', error);
