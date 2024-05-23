@@ -1,3 +1,5 @@
+// src/components/ReportList.tsx
+
 import React, { useEffect, useState } from 'react';
 import { getReports } from '../../services/apiService';
 import { Report } from '../../types/models';
@@ -30,7 +32,26 @@ const ReportList: React.FC = () => {
       <h1>Report List</h1>
       <ul>
         {reports.map(report => (
-          <li key={report.id}>{report.report_title}</li>
+          <li key={report.id}>
+            <strong>{report.report_title}</strong>
+            <h2>Questions</h2>
+            <ul>
+              {report.questions.map(question => (
+                <li key={question.id}>
+                  <strong>Question:</strong> {question.text}
+                  <ul>
+                    {question.answers.map(answer => (
+                      <li key={answer.id}>
+                        <strong>Answer:</strong> {answer.answer}
+                        <br />
+                        <strong>Explanation:</strong> {answer.explanation}
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          </li>
         ))}
       </ul>
     </div>
