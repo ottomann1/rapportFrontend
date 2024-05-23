@@ -1,40 +1,19 @@
-
-import React, { useEffect, useState } from 'react';
-import { getQuestions } from '../../services/apiService';
+import React from 'react';
 import { Question } from '../../types/models';
+import QuestionRow from '../rows/QuestionRow';
+import './QuestionList.css';
 
-const QuestionList: React.FC = () => {
-  const [questions, setQuestions] = useState<Question[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+interface QuestionListProps {
+  questions: Question[];
+}
 
-  useEffect(() => {
-    const fetchQuestions = async () => {
-      try {
-        const data = await getQuestions();
-        setQuestions(data);
-      } catch (error) {
-        setError('Failed to fetch questions');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchQuestions();
-  }, []);
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
-
+const QuestionList: React.FC<QuestionListProps> = ({ questions }) => {
   return (
-    <div>
-      <h1>Question List</h1>
-      <ul>
-        {questions.map(question => (
-          <li key={question.id}>{question.text}</li>
-        ))}
-      </ul>
-    </div>
+    <ul className="question-list">
+      {questions.map(question => (
+        <QuestionRow key={question.id} question={question} />
+      ))}
+    </ul>
   );
 };
 
