@@ -1,5 +1,3 @@
-// src/components/ReportList.tsx
-
 import React, { useEffect, useState } from 'react';
 import { getReports } from '../../services/apiService';
 import { Report } from '../../types/models';
