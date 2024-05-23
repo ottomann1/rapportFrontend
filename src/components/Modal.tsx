@@ -17,9 +17,6 @@ const Modal: React.FC<ModalProps> = ({ show, onClose, title, children }) => {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">{title}</h5>
-            <button type="button" className="close" aria-label="Close" onClick={onClose}>
-              <span aria-hidden="true">&times;</span>
-            </button>
           </div>
           <div className="modal-body">{children}</div>
           <div className="modal-footer">
