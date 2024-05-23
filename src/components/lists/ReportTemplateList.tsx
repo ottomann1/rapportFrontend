@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { getReportTemplates } from '../../services/apiService';
-import { ReportTemplate, Report } from '../../types/models';
+import { ReportTemplate, Report, Answer } from '../../types/models';
 import TemplateRow from '../rows/TemplateRow';
 import Modal from '../Modal';
+import AnswerRow from '../rows/AnswerRow';
 import './ReportTemplateList.css';
 
 const ReportTemplateList: React.FC = () => {
@@ -50,16 +51,20 @@ const ReportTemplateList: React.FC = () => {
         ))}
       </ul>
       <Modal show={showModal} onClose={() => setShowModal(false)} title={modalTitle}>
-        <ul>
-          {modalReports.map(report => (
-            <li key={report.id}>
-              <strong>{report.report_title}</strong>
-              <p>Submitted on: {report.submitted_on}</p>
-              <p>Last updated: {report.last_updated}</p>
-              {/* Add more report details here */}
-            </li>
-          ))}
-        </ul>
+        {modalReports.map(report => (
+          <ul key={report.id}>
+            <strong>{report.report_title}</strong>
+              
+            {report.questions.map(question => (
+              question.answers.map(answer => (
+                <AnswerRow key={answer.id} answer={answer} />
+              ))
+            ))}
+            <p>Reported by {report.submitted_by} at {report.company}</p>
+            <p>Submitted on: {report.submitted_on}</p>
+            <p>Last updated: {report.last_updated}</p>
+          </ul>
+        ))}
       </Modal>
     </div>
   );
