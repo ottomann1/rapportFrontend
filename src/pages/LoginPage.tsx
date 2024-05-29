@@ -9,8 +9,12 @@ const LoginPage: React.FC = () => {
   const [password, setPassword] = useState<string>('');
 
   const handleLogin = async () => {
-    await login(username, password);
-    navigate('/');
+    try {
+      await login(username, password);
+      navigate('/');
+    } catch (error) {
+      console.error('Login error', error);
+    }
   };
 
   return (
