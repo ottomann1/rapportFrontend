@@ -3,8 +3,8 @@ import { Navbar, Nav } from 'react-bootstrap';
 
 interface NavbarProps {
   pageName: string;
-  userName: string;
-  companyName: string;
+  userName: string | null;
+  companyName: string | null;
 }
 
 const CustomNavbar: React.FC<NavbarProps> = ({ pageName, userName, companyName }) => {
